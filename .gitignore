@@ -9,3 +9,4 @@ Debug/
 .vscode/
 cmake_install.cmake
 CMakeCache.txt
+run.bat
