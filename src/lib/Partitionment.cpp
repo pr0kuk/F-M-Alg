@@ -18,7 +18,7 @@ Partitionment::Partitionment(Graph graph) : graph{graph} {
   calculate_cost();
 }
 
-void Partitionment::update(unsigned Vertex) {
+void Partitionment::apply(unsigned Vertex) {
   color += vertices[Vertex] ? -1 : 1;
   vertices[Vertex] ^= 1;
 }
