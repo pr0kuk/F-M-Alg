@@ -9,4 +9,3 @@ target_include_directories(${project} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/inc
 target_compile_options(${project} PRIVATE -O3)
 set(OUT_DIR ${CMAKE_BINARY_DIR}/build/)
 set_target_properties(${project} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${OUT_DIR})
-add_subdirectory(src/lib)
