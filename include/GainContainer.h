@@ -11,8 +11,9 @@ class Graph;
 class Partitionment;
 class GainContainer {
     public:
-        GainContainer(Graph&, Partitionment&);
+        GainContainer(Graph&, Partitionment&, bool is_mod);
         Move best_feasible_move(int color);
+        const bool is_mod = false;
         bool is_empty(int color);
         void update(unsigned vertex, int color, int value);
         void erase(unsigned vertex, int color);
