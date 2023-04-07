@@ -2,7 +2,7 @@
 #include "Graph.h"
 #include "Partitionment.h"
 #include <algorithm>
-GainContainer::GainContainer(Graph &graph, Partitionment &prt) {
+GainContainer::GainContainer(Graph &graph, Partitionment &prt, bool is_mod) : is_mod(is_mod) {
     size_t prt_size = prt.get_prt().size();
     gain.resize(prt_size);
     for (unsigned i = 0; i != prt_size; ++i) {
@@ -51,8 +51,11 @@ void GainContainer::update(unsigned v, int color, int value) {
         return;
     erase(v, color);
     gain[v] += value;
-    get_needed_color(color)[gain[v]].push_front(v);
-    // get_needed_color(color)[gain[v]].insert(v);
+    if (is_mod)
+        get_needed_color(color)[gain[v]].push_back(v);
+    else
+        get_needed_color(color)[gain[v]].push_front(v);
+        // get_needed_color(color)[gain[v]].insert(v);
 }
 
 void GainContainer::erase(unsigned v, int color) {
