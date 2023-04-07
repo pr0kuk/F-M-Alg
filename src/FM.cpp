@@ -18,14 +18,14 @@ int FMpass(GainContainer &gain_container, Partitionment &prt, Graph &graph) {
     std::set<unsigned> changing;
     int cost = prt.get_cost(), best_cost = prt.get_cost();
     for (int color = prt.get_color(); !gain_container.is_empty(prt.get_color()); color = prt.get_color()){
-        Move gain = gain_container.best_feasible_move(color);
-        changing.insert(gain.first);
-        cost -= gain.second;
+        Move c_gain = gain_container.best_feasible_move(color);
+        changing.insert(c_gain.first);
+        cost -= c_gain.second;
         if (cost < best_cost) {
-        best_cost = cost;
-        changing.clear();
+            best_cost = cost;
+            changing.clear();
         }
-        gain_update(gain_container, prt, graph, gain.first);
+        gain_update(gain_container, prt, graph, c_gain.first);
     }
     for (auto v : changing)
         prt.apply(v);

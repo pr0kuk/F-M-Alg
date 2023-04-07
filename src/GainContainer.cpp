@@ -23,6 +23,7 @@ GainContainer::GainContainer(Graph &graph, Partitionment &prt, bool is_mod) : is
         get_needed_color(current_prt)[current_gain].push_back(i);
         // get_needed_color(current_prt)[current_gain].insert(i);
         gain[i] = current_gain;
+
     }
 }
 
@@ -36,14 +37,12 @@ bool GainContainer::is_empty(int color)  {
 
 Move GainContainer::best_feasible_move(int color) {
     Colors &c = get_needed_color(color);
-    auto &&[gain, vertices] = *c.rbegin();
-    unsigned v = vertices.front();
-    vertices.pop_front();
-    // unsigned v = *vertices.begin();
-    // vertices.erase(v);
-    if (vertices.empty())
-        c.erase(gain);
-    return std::make_pair(v, gain);
+    auto gain_vertices = *c.rbegin();
+    unsigned v = gain_vertices.second.front();
+    gain_vertices.second.pop_front();
+    if ((gain_vertices.second).empty())
+        c.erase(gain_vertices.first);
+    return std::make_pair(v, gain_vertices.first);
 }
 
 void GainContainer::update(unsigned v, int color, int value) {
