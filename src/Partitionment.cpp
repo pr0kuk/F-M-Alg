@@ -2,8 +2,8 @@
 #include <algorithm>
 
 void Partitionment::calculate_cost() {
-  for (auto it = std::begin(graph.get_edges()) + 1; it < std::end(graph.get_edges()); ++it)
-    if(std::find(std::begin(*it) + 1, std::end(*it), vertices[(*it)[0]]) != std::end(*it))
+  for (auto it = std::begin(graph.get_edges()) + 1; it != std::end(graph.get_edges()); ++it)
+    if (std::any_of(std::begin(*it) + 1, std::end(*it),[this, it](int v){return vertices[v] != vertices[(*it).front()];}))
       cost++;
 }
 
@@ -18,12 +18,12 @@ Partitionment::Partitionment(Graph graph) : graph{graph} {
   calculate_cost();
 }
 
-void Partitionment::apply(unsigned Vertex) {
-  color += vertices[Vertex] ? -1 : 1;
-  vertices[Vertex] ^= 1;
+void Partitionment::apply(unsigned v) {
+  color += vertices[v] ? -1 : 1;
+  vertices[v] ^= 1;
 }
 
-void Partitionment::print(std::ostream &Out) {
+void Partitionment::print(std::ostream &out) {
   for (auto it = std::begin(vertices) + 1; it < std::end(vertices); ++it)
-    Out << *it << '\n';
+    out << *it << '\n';
 }
