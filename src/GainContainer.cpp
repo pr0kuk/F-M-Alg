@@ -40,12 +40,11 @@ Move GainContainer::best_feasible_move(int color) {
     Colors &c = get_needed_color(color);
     auto&& [gainN, verticesN] = *c.rbegin();
     unsigned v = verticesN.front();
-    int gainold = gainN;
+    auto ret = std::make_pair(v, gainN);
     verticesN.pop_front();
-    assert(gainN!=gainold);
     if ((verticesN).empty())
-        c.erase(gainN);
-    return std::make_pair(v, gainN);
+        c.erase(std::prev(c.end()));
+    return ret;
 }
 
 void GainContainer::update(unsigned v, int color, int value) {
