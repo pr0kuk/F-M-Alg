@@ -13,3 +13,4 @@ run.bat
 Makefile
 run.sh
 build/
+.vs/
