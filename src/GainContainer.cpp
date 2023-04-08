@@ -2,6 +2,7 @@
 #include "Graph.h"
 #include "Partitionment.h"
 #include <algorithm>
+#include <cassert>
 GainContainer::GainContainer(Graph &graph, Partitionment &prt, bool is_mod) : is_mod(is_mod) {
     size_t prt_size = prt.get_prt().size();
     gain.resize(prt_size);
@@ -37,12 +38,14 @@ bool GainContainer::is_empty(int color)  {
 
 Move GainContainer::best_feasible_move(int color) {
     Colors &c = get_needed_color(color);
-    auto gain_vertices = *c.rbegin();
-    unsigned v = gain_vertices.second.front();
-    gain_vertices.second.pop_front();
-    if ((gain_vertices.second).empty())
-        c.erase(gain_vertices.first);
-    return std::make_pair(v, gain_vertices.first);
+    auto&& [gainN, verticesN] = *c.rbegin();
+    unsigned v = verticesN.front();
+    int gainold = gainN;
+    verticesN.pop_front();
+    assert(gainN!=gainold);
+    if ((verticesN).empty())
+        c.erase(gainN);
+    return std::make_pair(v, gainN);
 }
 
 void GainContainer::update(unsigned v, int color, int value) {
