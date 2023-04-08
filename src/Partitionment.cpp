@@ -7,7 +7,7 @@ void Partitionment::calculate_cost() {
             cost++;
 }
 
-Partitionment::Partitionment(Graph graph) : graph{graph} {
+Partitionment::Partitionment(Graph& graph_a) : graph(graph_a) {
     size_t size = graph.get_vertices().size() - 1;
     vertices = std::vector<int>(size + 1, 0);
     for (size_t i = size / 2 + 1; i <= size; vertices[i++] = 1);

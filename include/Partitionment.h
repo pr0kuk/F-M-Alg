@@ -7,7 +7,7 @@ class Partitionment {
         int color = 0;
         Graph &graph;
     public:
-        Partitionment(Graph graph);
+        Partitionment(Graph& graph);
         void set_cost(int cost) { this->cost = cost; }
         int get_cost() { return cost; }
         int get_color() { return color; }
