@@ -11,7 +11,7 @@ int main(int argc, char *argv[]) {
     bool is_mod = (argc == 3 && strncmp(argv[1], "-m", 2) == 0) ? true : false;
     std::string input_file = argv[argc-1];
     std::ifstream input(input_file);
-    std::ofstream output(input_file + ".part.2.txt");
+    std::ofstream output(input_file + ".part.2");
     if (!input.is_open()) {
         std::cout << "ERR: input file isnt opened\n";
         return -1;
